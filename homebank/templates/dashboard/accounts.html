@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block pages %}
+<div class="page" data-page="home">
+    <div class="page-content">
+        <div class="content-block-title">Accounts</div>
+        <div class="list-block">
+            {% for group in accounts | rejectattr("hidden") | groupby("type") %}
+            <div class="list-group">
+                <ul>
+                    <li class="list-group-title">{{ account_types[group.grouper] }}</li>
+                    {% for account in group.list %}
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">{{ account.name }}</div>
+                            <div class="item-after">{{ account.balance | currency}}</div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title"><b>Total</b></div>
+                            <div class="item-after"><b>{{ group.list | sum(attribute="balance") | currency}}</b></div>
+                        </div>
+                    </li>
+                    {% if loop.last %}
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title"><b>Grand Total</b></div>
+                            <div class="item-after"><b>{{ accounts | rejectattr("hidden") | sum(attribute="balance") | currency}}</b></div>
+                        </div>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

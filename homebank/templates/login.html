@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block pages %}
+<form method="post" action="{{ url_for("index.login") }}" id="login-form">
+<input type="hidden" name="{{ request.args.get("next", next or "") }}">
+<div class="login-screen modal-in">
+   <div class="view">
+      <div class="page">
+        <div class="page-content login-screen-content">
+          <div class="login-screen-title">Homebank WUI</div>
+          <form>
+            <div class="list-block">
+              <ul>
+                <li class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title label">Secret</div>
+                    <div class="item-input">
+                      <input type="password" name="secret" placeholder="Your secret code">
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="list-block">
+              <ul>
+                <li><a href="#" id="login-submit" class="item-link list-button">Sign In</a></li>
+              </ul>
+              <div class="list-block-label">
+                <p>Click Sign In to close Login Screen</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+   </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $("#login-submit").click(function() {
+        $("#login-form").submit();
+        event.preventDefault();
+    });
+});
+</script>
+{% endblock %}

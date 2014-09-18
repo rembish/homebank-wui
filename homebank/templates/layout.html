@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Homebank WUI — {% block title %}Main{% endblock %}</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="author" content="Alex Rembish <alex@rembish.org>">
+
+    <link rel="shortcut icon" href="{{ url_for('index.favicon') }}" sizes="16x16 32x32 48x48 64x64" type="image/x-icon" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('index.favicon', png="apple-touch-icon-57x57") }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('index.favicon', png="apple-touch-icon-114x114") }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('index.favicon', png="apple-touch-icon-72x72") }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('index.favicon', png="apple-touch-icon-144x144") }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('index.favicon', png="apple-touch-icon-60x60") }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('index.favicon', png="apple-touch-icon-120x120") }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('index.favicon', png="apple-touch-icon-76x76") }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('index.favicon', png="apple-touch-icon-152x152") }}">
+
+    <link rel="icon" type="image/png" href="{{ url_for('index.favicon', png="favicon-192x192") }}" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ url_for('index.favicon', png="favicon-160x160") }}" sizes="160x160">
+    <link rel="icon" type="image/png" href="{{ url_for('index.favicon', png="favicon-96x96") }}" sizes="96x96">
+    <link rel="icon" type="image/png" href="{{ url_for('index.favicon', png="favicon-16x16") }}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ url_for('index.favicon', png="favicon-32x32") }}" sizes="32x32">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/framework7.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- Status bar overlay for fullscreen mode-->
+<div class="statusbar-overlay"></div>
+<!-- Panels overlay-->
+<div class="panel-overlay"></div>
+<!-- Left panel with reveal effect-->
+<div class="panel panel-left panel-reveal">
+    <div class="content-block">
+        {% block left_panel %}{% endblock %}
+    </div>
+</div>
+<!-- Right panel with cover effect-->
+<div class="panel panel-right panel-cover">
+    <div class="content-block">
+        {% block right_panel %}{% endblock %}
+    </div>
+</div>
+<!-- Views-->
+<div class="views">
+    <!-- Your main view, should have "view-main" class-->
+    <div class="view view-main">
+        <!-- Top Navbar-->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <!-- We have home navbar without left link-->
+                <div class="sliding"><b>Homebank WUI</b></div>
+                <div class="right">
+                    <!-- Right link contains only icon - additional "icon-only" class-->
+                    <span class="icon-only"><img class="icon" src="{{ url_for('index.favicon', png="favicon-32x32") }}" width="32" height="32" /></span>
+                </div>
+            </div>
+        </div>
+        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages navbar-through toolbar-through">
+            <!-- Page, data-page contains page name-->
+            {% block pages %}{% endblock %}
+        </div>
+
+        {% if current_user.is_authenticated() %}
+        <!-- Bottom Toolbar-->
+        <div class="toolbar tabbar tabbar-labels">
+            <div class="toolbar-inner">
+                <a href="{{ url_for("dashboard.accounts") }}" class="tab-link active">
+                    <img src="{{ url_for("static", filename="img/accounts.png") }}" class="icon">
+                    <span class="tabbar-label">Accounts</span>
+                </a>
+                <a href="{{ url_for("index.logout") }}" class="tab-link">
+                    <i class="icon icon-form-password"></i>
+                    <span class="tabbar-label">Logout</span>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/framework7.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+{% block js %}{% endblock %}
+
+</body>
+</html>

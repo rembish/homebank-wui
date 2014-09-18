@@ -3,6 +3,7 @@ build
 dist
 debian/files
 debian/homebank-wui*
+homebank/settings.py
 include
 lib
 local
