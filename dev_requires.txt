@@ -1,0 +1,4 @@
+flask-debugtoolbar
+flask-script
+ipython
+python-debian

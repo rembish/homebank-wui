@@ -1,0 +1,19 @@
+Source: homebank-wui
+Section: python
+Priority: extra
+Maintainer: Aleksey Rembish <alex@rembish.org>
+Build-Depends:
+ debhelper (>= 9),
+ python,
+ python-debian,
+ python-setuptools
+Standards-Version: 3.9.5
+X-Python-Version: 2.7
+
+Package: homebank-wui
+Architecture: all
+Depends:
+ ${misc:Depends},
+ ${python:Depends}
+Description: WUI for Homebank
+ Web User Interface for Homebank
