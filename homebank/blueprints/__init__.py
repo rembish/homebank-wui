@@ -13,14 +13,14 @@ root = Blueprint('index', __name__)
 @root.route("/")
 @login_required
 def index():
-    return redirect(url_for("dashboard.accounts"))
+    return redirect(url_for("accounts.index"))
 
 
 @root.route("/login", methods=("POST", "GET"))
 @with_template("login.html")
 def login():
-    secret = request.form.get("secret", None)
-    if secret == current_app.config['SECRET_KEY']:
+    pincode = int(request.form.get("pincode", 0)) or None
+    if pincode == current_app.config['PINCODE']:
         login_user(User())
         return redirect(request.form.get("next") or url_for("index.index"))
 

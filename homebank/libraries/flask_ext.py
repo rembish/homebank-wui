@@ -14,7 +14,7 @@ class Blueprint(BaseBlueprint):
 
 class User(UserMixin):
     def get_id(self):
-        return current_app.config['SECRET_KEY']
+        return current_app.config['PINCODE']
 
 
 def get_banking():

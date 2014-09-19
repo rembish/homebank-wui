@@ -28,7 +28,7 @@ def make_app(import_name=__name__,
     def not_found(ex):
         return render_template("404.html"), 404
 
-    for blueprint in ['__init__', 'dashboard']:
+    for blueprint in ['__init__', 'accounts', 'transactions']:
         app.register_blueprint(import_string(
             'homebank.blueprints.%s:root' % blueprint))
 
@@ -38,7 +38,7 @@ def make_app(import_name=__name__,
 
     @login_manager.user_loader
     def load_user(uid):
-        if uid != app.config['SECRET_KEY']:
+        if uid != app.config['PINCODE']:
             return None
         return User()
 

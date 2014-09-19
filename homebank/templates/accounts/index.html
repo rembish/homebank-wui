@@ -10,12 +10,14 @@
                 <ul>
                     <li class="list-group-title">{{ account_types[group.grouper] }}</li>
                     {% for account in group.list %}
-                    <li class="item-content">
-                        <div class="item-inner">
-                            <div class="item-title">{{ account.name }}</div>
-                            <div class="item-after">{{ account.balance | currency}}</div>
-                        </div>
-                    </li>
+                    <a href="{{ url_for("accounts.view", id=account.id) }}" class="item-link">
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">{{ account.name }}</div>
+                                <div class="item-after">{{ account.balance | currency}}</div>
+                            </div>
+                        </li>
+                    </a>
                     {% endfor %}
                     <li class="item-content">
                         <div class="item-inner">

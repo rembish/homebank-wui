@@ -40,18 +40,6 @@
 <div class="statusbar-overlay"></div>
 <!-- Panels overlay-->
 <div class="panel-overlay"></div>
-<!-- Left panel with reveal effect-->
-<div class="panel panel-left panel-reveal">
-    <div class="content-block">
-        {% block left_panel %}{% endblock %}
-    </div>
-</div>
-<!-- Right panel with cover effect-->
-<div class="panel panel-right panel-cover">
-    <div class="content-block">
-        {% block right_panel %}{% endblock %}
-    </div>
-</div>
 <!-- Views-->
 <div class="views">
     <!-- Your main view, should have "view-main" class-->
@@ -59,12 +47,10 @@
         <!-- Top Navbar-->
         <div class="navbar">
             <div class="navbar-inner">
+                <div class="left">{% block top_left %}{% endblock %}</div>
                 <!-- We have home navbar without left link-->
-                <div class="sliding"><b>Homebank WUI</b></div>
-                <div class="right">
-                    <!-- Right link contains only icon - additional "icon-only" class-->
-                    <span class="icon-only"><img class="icon" src="{{ url_for('index.favicon', png="favicon-32x32") }}" width="32" height="32" /></span>
-                </div>
+                <div class="center sliding">{% block top_center %}<b>Homebank WUI</b>{% endblock %}</div>
+                <div class="right">{% block top_right %}{% endblock %}</div>
             </div>
         </div>
         <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -77,7 +63,7 @@
         <!-- Bottom Toolbar-->
         <div class="toolbar tabbar tabbar-labels">
             <div class="toolbar-inner">
-                <a href="{{ url_for("dashboard.accounts") }}" class="tab-link active">
+                <a href="{{ url_for("accounts.index") }}" class="tab-link active">
                     <img src="{{ url_for("static", filename="img/accounts.png") }}" class="icon">
                     <span class="tabbar-label">Accounts</span>
                 </a>
